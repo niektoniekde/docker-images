@@ -3,8 +3,8 @@ set -eu -o pipefail
 
 CONFD_DIR="/usr/local/etc/dovecot/conf.d"
 
-if ! ls -1 ${CONFD_DIR}/*.conf 2>&1; then
-  cat > "$CONFD_DIR}/00_example.conf" << EOF
+if ! ls -1 ${CONFD_DIR}/*.conf 2>/dev/null; then
+  cat > "${CONFD_DIR}/00_example.conf" << EOF
 mail_home=/var/local/vmail/%Lu
 mail_location=maildir:~/
 mail_uid=1000
