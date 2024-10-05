@@ -7,6 +7,7 @@ ARG PKGS_BASIC=" \
   bash \
   bind-tools \
   curl \
+  iproute2-ss \
   mailx \
   netcat-openbsd \
   socat \
@@ -41,15 +42,14 @@ RUN apk add --no-cache \
     -h /home/vmail \
     -s /sbin/nologin \
     vmail \
-  && mkdir -p /var/local/vmail \
-  && chown vmail:vmail -R /var/local/vmail \
   && mkdir -p /usr/local/etc/dovecot/conf.d \
-  && mv /tmp/dovecot.conf /usr/local/etc/dovecot \
+  && mkdir -p /var/local/vmail \
   && chown root:dovecot -R /usr/local/etc/dovecot \
+  && mv /tmp/dovecot.conf /usr/local/etc/dovecot \
   && chmod 0755 /usr/local/etc/dovecot \
+  && chmod 0775 /usr/local/etc/dovecot/conf.d \
   && chmod 0755 /usr/local/bin/entrypoint.bash
 
 VOLUME ["/usr/local/etc/dovecot/conf.d", "/var/local/vmail"]
 
-USER dovecot
 ENTRYPOINT ["/usr/local/bin/entrypoint.bash"]

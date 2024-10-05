@@ -21,42 +21,12 @@ passdb {
 }
 
 ssl=yes
-ssl_cert=</etc/ssl/dovecot/cert.pem
-ssl_key=</etc/ssl/dovecot/key.pem
+ssl_cert=</etc/ssl/dovecot/server.pem
+ssl_key=</etc/ssl/dovecot/server.pem
 
 namespace {
   inbox = yes
   separator = /
-}
-
-service lmtp {
-  inet_listener {
-    port = 1024
-  }
-}
-
-service pop3 {
-  inet_listener {
-    port = 1995
-  }
-}
-
-service imap {
-  inet_listener {
-    port = 1993
-  }
-}
-
-service submission {
-  inet_listener {
-    port = 1587
-  }
-}
-
-service sieve {
-  inet_listener {
-    port = 4190
-  }
 }
 
 listen = *
