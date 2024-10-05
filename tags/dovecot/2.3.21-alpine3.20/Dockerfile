@@ -30,6 +30,7 @@ ARG PKGS_DOVECOT=" \
 "
 
 COPY dovecot.conf /tmp/dovecot.conf
+COPY entrypoint.bash /usr/local/bin/entrypoint.bash
 RUN apk add --no-cache \
   ${PKGS_BASIC} \
   ${PKGS_DOVECOT} \
@@ -45,7 +46,8 @@ RUN apk add --no-cache \
   && mkdir -p /usr/local/etc/dovecot/conf.d \
   && mv /tmp/dovecot.conf /usr/local/etc/dovecot \
   && chown root:dovecot -R /usr/local/etc/dovecot \
-  && chmod 0755 /usr/local/etc/dovecot
+  && chmod 0755 /usr/local/etc/dovecot \
+  && chmod 0755 /usr/local/bin/entrypoint.bash
 
 VOLUME ["/usr/local/etc/dovecot/conf.d", "/var/local/vmail"]
 
