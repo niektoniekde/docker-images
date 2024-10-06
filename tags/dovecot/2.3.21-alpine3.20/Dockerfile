@@ -15,6 +15,7 @@ ARG PKGS_BASIC=" \
   mailx \
   netcat-openbsd \
   socat \
+  tar \
 "
 
 ARG PKGS_DOVECOT=" \
